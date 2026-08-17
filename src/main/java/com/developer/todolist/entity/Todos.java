@@ -20,7 +20,6 @@ public class Todos {
     @NotBlank(message = "Title is mandatory")
     @Size(max = 50, message = "Title cannot exceed 50 characters")
     private String title;
-
     private boolean completed = false;
 
     @CreatedDate
