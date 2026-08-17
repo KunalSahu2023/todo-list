@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
  * 3. Configuration Class (@Configuration) - Allows you to register extra beans.
  */
 @SpringBootApplication
-@EnableJpaAuditing // Enables automatic timestamp tracking
+@EnableJpaAuditing
 public class TodoListApplication {
 
     public static void main(String[] args) {
