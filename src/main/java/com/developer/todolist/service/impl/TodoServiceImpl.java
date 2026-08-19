@@ -1,62 +1,182 @@
 package todolist.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import todolist.entity.Todos;
 import todolist.entity.User;
+import todolist.exception.ResourceNotFoundException;
 import todolist.model.TodoRequest;
 import todolist.model.TodoResponse;
 import todolist.repository.TodoRepo;
 import todolist.repository.UserRepo;
 import todolist.service.TodoService;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TodoServiceImpl implements TodoService {
 
     private final TodoRepo todoRepo;
     private final UserRepo userRepo;
 
     @Override
-    public TodoResponse createTodo(TodoRequest todoRequest, String username) {
+    public TodoResponse createTodo(
+            TodoRequest request,
+            String username
+    ) {
 
-        User user = userRepo.findByUsername(username).orElseThrow(() ->
-                        new RuntimeException("User not found"));
+        User user = getUser(username);
 
-        Todos todo = new Todos();
-        todo.setTitle(todoRequest.getTitle());
-        todo.setCompleted(todoRequest.isCompleted());
+        Todos todo = Todos.builder()
+                .title(request.getTitle())
+                .completed(request.isCompleted())
+                .user(user)
+                .build();
 
-        todo.setUser(user);
         Todos savedTodo = todoRepo.save(todo);
 
-        // Map Saved Entity -> Response DTO
         return mapToResponse(savedTodo);
     }
 
     @Override
-    public List<TodoResponse> getTodos(String username) {
+    @Transactional(readOnly = true)
+    public Page<TodoResponse> getTodos(
+            String username,
+            int page,
+            int size,
+            Boolean completed,
+            String search
+    ) {
 
-        // Find logged-in user
-        User user = userRepo.findByUsername(username).orElseThrow(() ->
-                        new RuntimeException("User not found"));
+        User user = getUser(username);
 
-        // Get only this user's Todos
-        return todoRepo.findByUser(user).stream().
-                map(this::mapToResponse).collect(Collectors.toList());
+        Pageable pageable =
+                PageRequest.of(page, size);
+
+        Page<Todos> todos;
+
+        if (completed != null) {
+
+            todos = todoRepo.findByUserAndCompleted(
+                    user,
+                    completed,
+                    pageable
+            );
+
+        } else if (search != null &&
+                !search.trim().isEmpty()) {
+
+            todos = todoRepo
+                    .findByUserAndTitleContainingIgnoreCase(
+                            user,
+                            search,
+                            pageable
+                    );
+
+        } else {
+
+            todos = todoRepo.findByUser(
+                    user,
+                    pageable
+            );
+        }
+
+        return todos.map(this::mapToResponse);
     }
 
-    private TodoResponse mapToResponse(Todos todo) {
-        TodoResponse response = new TodoResponse();
+    @Override
+    @Transactional(readOnly = true)
+    public TodoResponse getTodoById(
+            Long id,
+            String username
+    ) {
+
+        User user = getUser(username);
+
+        Todos todo = todoRepo
+                .findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Todo not found with id: " + id
+                        )
+                );
+
+        return mapToResponse(todo);
+    }
+
+    @Override
+    public TodoResponse updateTodo(
+            Long id,
+            TodoRequest request,
+            String username
+    ) {
+
+        User user = getUser(username);
+
+        Todos todo = todoRepo
+                .findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Todo not found with id: " + id
+                        )
+                );
+
+        todo.setTitle(request.getTitle());
+        todo.setCompleted(request.isCompleted());
+
+        Todos updatedTodo =
+                todoRepo.save(todo);
+
+        return mapToResponse(updatedTodo);
+    }
+
+    @Override
+    public void deleteTodo(
+            Long id,
+            String username
+    ) {
+
+        User user = getUser(username);
+
+        Todos todo = todoRepo
+                .findByIdAndUser(id, user)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Todo not found with id: " + id
+                        )
+                );
+
+        todoRepo.delete(todo);
+    }
+
+    private User getUser(String username) {
+
+        return userRepo
+                .findByUsername(username)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "User not found: " + username
+                        )
+                );
+    }
+
+    private TodoResponse mapToResponse(
+            Todos todo
+    ) {
+
+        TodoResponse response =
+                new TodoResponse();
+
         response.setId(todo.getId());
         response.setTitle(todo.getTitle());
         response.setCompleted(todo.isCompleted());
         response.setCreatedAt(todo.getCreatedAt());
         response.setUpdatedAt(todo.getUpdatedAt());
+
         return response;
     }
-
 }
