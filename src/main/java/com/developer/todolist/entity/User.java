@@ -2,14 +2,19 @@ package todolist.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -25,4 +30,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role = Role.USER;
+
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Todos> todos = new ArrayList<>();
 }
