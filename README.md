@@ -1,25 +1,81 @@
 # 📝 Full-Stack To-Do List Application
-A responsive, full-stack To-Do List application that allows users to manage their daily tasks seamlessly. Scalable architecture powered by a **Java backend** and a persistent **PostgreSQL database**.
+
+A secure and scalable To-Do List REST API built using **Java, Spring Boot, Spring Security, JWT, Spring Data JPA, and PostgreSQL**.
+
+The application provides complete Todo CRUD operations with **JWT-based authentication, Role-Based Access Control (RBAC), user-specific Todo ownership, validation, exception handling, pagination, searching, and filtering**.
 
 ## 🚀 Features
-*   **Create, Read, Update, Delete (CRUD):** Add new tasks, edit existing text, toggle completion status, and remove tasks permanently.
-*   **Persistent Database Storage:** Tasks are securely stored in a cloud or local PostgreSQL database instead of volatile browser memory.
-*   **RESTful API:** Clean, structured backend endpoints handling JSON data exchange.
-*   **Responsive UI:** A clean HTML, CSS, and modern JavaScript frontend that communicates asynchronously with the API using `fetch()`.
 
-## 🛠️ Tech Stack
-*   **Frontend:** HTML5, CSS3, JavaScript (ES6+, Async/Await)
-*   **Backend:** Java (Spring Boot)
-*   **Database:** PostgreSQL
-*   **ORM / Data Access:** Spring Data JPA / Hibernate
-*   **Build Tool:** Maven / Gradle *(Keep only the one you use)*
-  
-## 🔌 API Endpoints
-The frontend communicates with the Java backend via the following REST API endpoints:
-| Method | Endpoint | Description | Request Body (JSON) |
-| :--- | :--- | :--- | :--- |
-| **GET** | `/api/todos` | Fetch all tasks from the database | None |
-| **POST** | `/api/todos` | Save a new task | `{ "title": "String", "completed": false }` |
-| **PUT** | `/api/todos/{id}` | Edit task text or toggle status | `{ "title": "String", "completed": true }` |
-| **DELETE** | `/api/todos/{id}` | Delete a task by its unique ID | None |
+### 🔐 Authentication & Authorization
 
+- User registration
+- User login
+- JWT-based authentication
+- Secure password hashing using BCrypt
+- Role-Based Access Control (RBAC)
+- `USER` and `ADMIN` roles
+- Protected API endpoints
+- Admin-only endpoints
+- User-specific Todo access
+
+### 📝 Todo Management
+
+- Create Todo
+- Get all Todos
+- Get Todo by ID
+- Update Todo
+- Delete Todo
+- Mark Todo as completed/uncompleted
+- Todo ownership based on authenticated user
+
+### 🔎 Search, Filter & Pagination
+
+- Pagination support
+- Filter Todos by completion status
+- Search Todos by title
+- User-specific Todo listing
+
+### 🛡️ Validation & Exception Handling
+
+- Request validation using Jakarta Bean Validation
+- `@NotBlank`
+- `@Size`
+- Global exception handling
+- Standardized error responses
+- `404 Not Found` for unavailable resources
+- `400 Bad Request` for validation errors
+
+### 🗄️ Database
+
+- PostgreSQL support for persistent storage
+- H2 database support for local development/testing
+- Spring Data JPA
+- Hibernate ORM
+- User-to-Todo relationship
+
+# 🛠️ Tech Stack
+
+## Backend
+
+- Java 17+
+- Spring Boot
+- Spring Web
+- Spring Security
+- JWT
+- Spring Data JPA
+- Hibernate
+- Jakarta Bean Validation
+- Lombok
+
+## Database
+
+- PostgreSQL
+- H2 Database for development/testing
+
+## Build Tool
+
+- Maven
+
+## API Testing
+
+- Postman
