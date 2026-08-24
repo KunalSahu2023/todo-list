@@ -54,12 +54,20 @@ public class TodoServiceImpl implements TodoService {
 
         User user = getUser(username);
 
-        Pageable pageable =
-                PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size);
 
         Page<Todos> todos;
 
-        if (completed != null) {
+        if (completed != null && search != null && !search.isBlank()) {
+
+            todos = todoRepo.findByUserAndCompletedAndTitleContainingIgnoreCase(
+                    user,
+                    completed,
+                    search,
+                    pageable
+            );
+
+        } else if (completed != null) {
 
             todos = todoRepo.findByUserAndCompleted(
                     user,
@@ -67,15 +75,13 @@ public class TodoServiceImpl implements TodoService {
                     pageable
             );
 
-        } else if (search != null &&
-                !search.trim().isEmpty()) {
+        } else if (search != null && !search.isBlank()) {
 
-            todos = todoRepo
-                    .findByUserAndTitleContainingIgnoreCase(
-                            user,
-                            search,
-                            pageable
-                    );
+            todos = todoRepo.findByUserAndTitleContainingIgnoreCase(
+                    user,
+                    search,
+                    pageable
+            );
 
         } else {
 
@@ -128,8 +134,7 @@ public class TodoServiceImpl implements TodoService {
         todo.setTitle(request.getTitle());
         todo.setCompleted(request.isCompleted());
 
-        Todos updatedTodo =
-                todoRepo.save(todo);
+        Todos updatedTodo = todoRepo.save(todo);
 
         return mapToResponse(updatedTodo);
     }
