@@ -1,4 +1,4 @@
-package todolist.controller;
+package com.developer.todolist.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
