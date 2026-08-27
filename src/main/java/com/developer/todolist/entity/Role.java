@@ -1,4 +1,4 @@
-package todolist.entity;
+package com.developer.todolist.entity;
 
 public enum Role {
 

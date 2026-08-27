@@ -1,10 +1,9 @@
-package todolist;
+package com.developer.todolist;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
 /**
  * The entry point of the Spring Boot application.
  *

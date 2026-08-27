@@ -1,0 +1,12 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1" date="1787853708714" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 27-08-2026 23:31 [Changes]" />
+  <binary>
+    <option name="AFTER_PATH" value="target/demo-0.0.1-SNAPSHOT.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/demo-0.0.1-SNAPSHOT.jar" />
+  </binary>
+  <binary>
+    <option name="AFTER_PATH" value="target/demo-0.0.1-SNAPSHOT.jar.original" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/demo-0.0.1-SNAPSHOT.jar.original" />
+  </binary>
+</changelist>

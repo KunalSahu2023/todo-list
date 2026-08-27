@@ -1,4 +1,4 @@
-package todolist.entity;
+package com.developer.todolist.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
