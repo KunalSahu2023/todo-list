@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class TodoRequest {
 
     @NotBlank(message = "Title is mandatory")
-    @Size(max = 50, message = "Title cannot exceed 50 characters")
+    @Size(min= 1, max = 50, message = "Title must be between 1 and characters")
     private String title;
 
     private boolean completed = false;
