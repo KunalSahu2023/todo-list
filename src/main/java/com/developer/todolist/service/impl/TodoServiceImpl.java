@@ -1,19 +1,20 @@
-package todolist.service.impl;
+package com.developer.todolist.service.impl;
 
+import com.developer.todolist.entity.Todos;
+import com.developer.todolist.entity.User;
+import com.developer.todolist.exception.ResourceNotFoundException;
+import com.developer.todolist.model.TodoRequest;
+import com.developer.todolist.model.TodoResponse;
+import com.developer.todolist.repository.TodoRepo;
+import com.developer.todolist.repository.UserRepo;
+import com.developer.todolist.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import todolist.entity.Todos;
-import todolist.entity.User;
-import todolist.exception.ResourceNotFoundException;
-import todolist.model.TodoRequest;
-import todolist.model.TodoResponse;
-import todolist.repository.TodoRepo;
-import todolist.repository.UserRepo;
-import todolist.service.TodoService;
+
 
 @Service
 @RequiredArgsConstructor

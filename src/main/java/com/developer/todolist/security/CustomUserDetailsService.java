@@ -1,12 +1,12 @@
-package todolist.security;
+package com.developer.todolist.security;
 
+import com.developer.todolist.entity.User;
+import com.developer.todolist.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import todolist.entity.User;
-import todolist.repository.UserRepo;
 
 @Service
 @RequiredArgsConstructor

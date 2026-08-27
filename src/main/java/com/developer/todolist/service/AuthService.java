@@ -1,8 +1,8 @@
-package todolist.service;
+package com.developer.todolist.service;
 
-import todolist.model.AuthResponse;
-import todolist.model.LoginRequest;
-import todolist.model.RegisterRequest;
+import com.developer.todolist.model.AuthResponse;
+import com.developer.todolist.model.LoginRequest;
+import com.developer.todolist.model.RegisterRequest;
 
 public interface AuthService {
 

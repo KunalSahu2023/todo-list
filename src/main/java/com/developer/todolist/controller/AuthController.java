@@ -1,13 +1,13 @@
-package todolist.controller;
+package com.developer.todolist.controller;
 
+import com.developer.todolist.model.AuthResponse;
+import com.developer.todolist.model.LoginRequest;
+import com.developer.todolist.model.RegisterRequest;
+import com.developer.todolist.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import todolist.model.AuthResponse;
-import todolist.model.LoginRequest;
-import todolist.model.RegisterRequest;
-import todolist.service.AuthService;
 
 @RestController
 @RequestMapping("/auth")

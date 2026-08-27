@@ -1,4 +1,4 @@
-package todolist.model;
+package com.developer.todolist.model;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

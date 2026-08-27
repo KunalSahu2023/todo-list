@@ -1,5 +1,4 @@
-package todolist.model;
-
+package com.developer.todolist.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
