@@ -1,0 +1,37 @@
+Index: src/main/java/com/developer/todolist/repository/UserRepo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package todolist.repository;\r\n\r\nimport org.springframework.data.jpa.repository.JpaRepository;\r\nimport org.springframework.stereotype.Repository;\r\nimport todolist.entity.User;\r\n\r\nimport java.util.Optional;\r\n\r\n@Repository\r\npublic interface UserRepo extends JpaRepository<User, Long> {\r\n    Optional<User> findByUsername(String username);\r\n    boolean existsByUsername(String username);\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/com/developer/todolist/repository/UserRepo.java b/src/main/java/com/developer/todolist/repository/UserRepo.java
+--- a/src/main/java/com/developer/todolist/repository/UserRepo.java	(revision a5f92d3a847afa440c24191b4ac975d9f00c5788)
++++ b/src/main/java/com/developer/todolist/repository/UserRepo.java	(date 1787852283633)
+@@ -1,8 +1,8 @@
+-package todolist.repository;
++package com.developer.todolist.repository;
+ 
++import com.developer.todolist.entity.User;
+ import org.springframework.data.jpa.repository.JpaRepository;
+ import org.springframework.stereotype.Repository;
+-import todolist.entity.User;
+ 
+ import java.util.Optional;
+ 
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision a5f92d3a847afa440c24191b4ac975d9f00c5788)
++++ b/.idea/vcs.xml	(date 1787853423271)
+@@ -2,5 +2,6 @@
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+     <mapping directory="" vcs="Git" />
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
