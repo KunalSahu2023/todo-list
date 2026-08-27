@@ -1,4 +1,4 @@
-package todolist.security;
+package com.developer.todolist.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,8 +1,8 @@
-package todolist.service;
+package com.developer.todolist.service;
 
+import com.developer.todolist.model.TodoRequest;
+import com.developer.todolist.model.TodoResponse;
 import org.springframework.data.domain.Page;
-import todolist.model.TodoRequest;
-import todolist.model.TodoResponse;
 
 import java.util.List;
 

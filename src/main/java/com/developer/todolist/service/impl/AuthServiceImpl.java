@@ -1,20 +1,21 @@
-package todolist.service.impl;
+package com.developer.todolist.service.impl;
 
+import com.developer.todolist.entity.Role;
+import com.developer.todolist.entity.User;
+import com.developer.todolist.model.AuthResponse;
+import com.developer.todolist.model.LoginRequest;
+import com.developer.todolist.model.RegisterRequest;
+import com.developer.todolist.repository.UserRepo;
+import com.developer.todolist.security.CustomUserDetailsService;
+import com.developer.todolist.security.JwtService;
+import com.developer.todolist.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import todolist.entity.Role;
-import todolist.entity.User;
-import todolist.model.AuthResponse;
-import todolist.model.LoginRequest;
-import todolist.model.RegisterRequest;
-import todolist.repository.UserRepo;
-import todolist.security.CustomUserDetailsService;
-import todolist.security.JwtService;
-import todolist.service.AuthService;
+
 
 @Service
 @RequiredArgsConstructor

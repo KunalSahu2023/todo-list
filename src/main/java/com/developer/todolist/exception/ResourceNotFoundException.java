@@ -1,4 +1,4 @@
-package todolist.exception;
+package com.developer.todolist.exception;
 
 public class ResourceNotFoundException
         extends RuntimeException {
