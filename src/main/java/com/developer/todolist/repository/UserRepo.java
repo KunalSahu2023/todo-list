@@ -1,8 +1,9 @@
-package todolist.repository;
+package com.developer.todolist.repository;
 
+import com.developer.todolist.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import todolist.entity.User;
+
 
 import java.util.Optional;
 

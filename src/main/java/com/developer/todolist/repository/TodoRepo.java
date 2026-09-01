@@ -1,11 +1,12 @@
-package todolist.repository;
+package com.developer.todolist.repository;
 
+import com.developer.todolist.entity.Todos;
+import com.developer.todolist.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import todolist.entity.Todos;
-import todolist.entity.User;
+
 
 import java.util.Optional;
 

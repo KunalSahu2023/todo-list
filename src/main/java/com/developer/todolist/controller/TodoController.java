@@ -1,5 +1,8 @@
-package todolist.controller;
+package com.developer.todolist.controller;
 
+import com.developer.todolist.model.TodoRequest;
+import com.developer.todolist.model.TodoResponse;
+import com.developer.todolist.service.TodoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -7,9 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
-import todolist.model.TodoRequest;
-import todolist.model.TodoResponse;
-import todolist.service.TodoService;
+
 
 @RestController
 @RequestMapping("/todos")

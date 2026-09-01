@@ -1,4 +1,4 @@
-package todolist.entity;
+package com.developer.todolist.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
