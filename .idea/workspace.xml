@@ -4,52 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61fbb718-ae4c-4857-b597-48c7ab08c731" name="Changes" comment="fix: fix jwt environment configuration">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/demo-0.0.1-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/demo-0.0.1-SNAPSHOT.jar.original" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_27-08-2026_23_31__Changes_1.xml" beforeDir="false" />
+    <list default="true" id="61fbb718-ae4c-4857-b597-48c7ab08c731" name="Changes" comment="fix: add required details in properties file">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/developer/todolist/config/RedisConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/developer/todolist/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/developer/todolist/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/developer/todolist/repository/TodoRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/developer/todolist/repository/TodoRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/developer/todolist/security/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/developer/todolist/security/JwtService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/developer/todolist/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/developer/todolist/config/SecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/developer/todolist/repository/TodoRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/developer/todolist/repository/TodoRepo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/developer/todolist/security/JwtService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/developer/todolist/security/JwtService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/developer/todolist/service/impl/TodoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/developer/todolist/service/impl/TodoServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/TodoListApplication.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/config/SecurityConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/controller/AuthController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/controller/TodoController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/entity/Role.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/entity/Todos$TodosBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/entity/Todos.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/entity/User$UserBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/entity/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/exception/ErrorResponse$ErrorResponseBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/exception/ErrorResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/exception/GlobalExceptionHandler.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/exception/ResourceNotFoundException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/model/AuthResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/model/LoginRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/model/RegisterRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/model/TodoRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/model/TodoResponse.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/repository/TodoRepo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/repository/UserRepo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/security/CustomUserDetailsService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/security/JwtAuthenticationFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/security/JwtService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/service/AuthService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/service/TodoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/service/impl/AuthServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/todolist/service/impl/TodoServiceImpl.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/demo-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +59,7 @@
     "Spring Boot.TodoListApplication.executor": "Debug",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RunAnythingCache">
@@ -153,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1787858768579</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix: add required details in properties file">
+      <option name="closed" value="true" />
+      <created>1788538545064</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1788538545066</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -170,6 +140,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix: import correct path" />
     <MESSAGE value="fix: add required file" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add required file" />
+    <MESSAGE value="fix: add required details in properties file" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add required details in properties file" />
   </component>
 </project>
