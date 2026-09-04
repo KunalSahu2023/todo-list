@@ -27,4 +27,6 @@ public interface TodoRepo extends JpaRepository<Todos, Long> {
             String title,
             Pageable pageable
     );
+
+    Page<Todos> findByUserAndCompletedAndTitleContainingIgnoreCase(User user, Boolean completed, String search, Pageable pageable);
 }

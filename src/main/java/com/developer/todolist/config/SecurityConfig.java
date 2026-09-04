@@ -46,11 +46,6 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
 
-                        // H2 Console
-                        .requestMatchers(
-                                "/h2-console/**"
-                        ).permitAll()
-
                         // Public APIs
                         .requestMatchers(
                                 "/auth/**"
