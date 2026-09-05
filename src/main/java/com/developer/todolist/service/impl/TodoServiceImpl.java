@@ -56,6 +56,16 @@ public class TodoServiceImpl implements TodoService {
             Boolean completed,
             String search
     ) {
+        String cacheKey= "todos:"+username+ ":page: "+page+ ":size: "+size+ ":completed: "+ completed;
+
+        Object cacheTodos= redisTemplate.opsForValue().get(cacheKey);
+
+        if(cacheKey!=null){
+            System.out.println("REDIS CACHE HIT: "+cacheKey);
+            return (Page<TodoResponse>)cacheTodos;
+        }
+        System.out.println("REDIS CACHE MISS: "+cacheKey);
+
         User user = getUser(username);
 
         Pageable pageable = PageRequest.of(page, size);
@@ -95,7 +105,10 @@ public class TodoServiceImpl implements TodoService {
             );
         }
 
-        return todos.map(this::mapToResponse);
+        Page<TodoResponse> response= todos.map(this::mapToResponse);
+        redisTemplate.opsForValue().set(cacheKey, response);
+
+        return response;
     }
 
     @Override
