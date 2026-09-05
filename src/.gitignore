@@ -1,0 +1,85 @@
+# =========================
+# Java
+# =========================
+*.class
+*.jar
+*.war
+*.ear
+
+# =========================
+# Build output
+# =========================
+target/
+build/
+out/
+bin/
+
+# =========================
+# IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# IntelliJ workspace
+*.workspace.xml
+
+# =========================
+# Maven
+# =========================
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# =========================
+# Gradle
+# =========================
+.gradle/
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+
+# =========================
+# Temporary files
+# =========================
+*.tmp
+*.temp
+*.bak
+*~
+
+# =========================
+# Environment / Secrets
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Local application config
+# =========================
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# =========================
+# Test / Coverage
+# =========================
+coverage/
+*.exec
+
+# =========================
+# Database files
+# =========================
+*.db
+*.sqlite
+*.sqlite3
