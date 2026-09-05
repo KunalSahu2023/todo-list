@@ -7,34 +7,29 @@
 *.ear
 
 # =========================
-# Build output
+# Maven Build Output
 # =========================
 target/
-build/
-out/
-bin/
 
 # =========================
 # IntelliJ IDEA
 # =========================
 .idea/
 *.iml
-*.iws
 *.ipr
-
-# IntelliJ workspace
-*.workspace.xml
+*.iws
 
 # =========================
-# Maven
+# Eclipse
 # =========================
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
+.classpath
+.project
+.settings/
 
 # =========================
-# Gradle
+# VS Code
 # =========================
-.gradle/
+.vscode/
 
 # =========================
 # Logs
@@ -43,7 +38,7 @@ bin/
 logs/
 
 # =========================
-# Temporary files
+# Temporary Files
 # =========================
 *.tmp
 *.temp
@@ -58,14 +53,14 @@ logs/
 !.env.example
 
 # =========================
-# Local application config
+# Local Configuration
 # =========================
 application-local.properties
 application-local.yml
 application-local.yaml
 
 # =========================
-# OS files
+# OS Generated Files
 # =========================
 .DS_Store
 Thumbs.db
@@ -78,8 +73,13 @@ coverage/
 *.exec
 
 # =========================
-# Database files
+# Database Files
 # =========================
 *.db
 *.sqlite
 *.sqlite3
+
+# =========================
+# Gradle
+# =========================
+.gradle/
