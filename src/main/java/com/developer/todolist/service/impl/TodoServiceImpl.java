@@ -56,7 +56,6 @@ public class TodoServiceImpl implements TodoService {
             Boolean completed,
             String search
     ) {
-
         User user = getUser(username);
 
         Pageable pageable = PageRequest.of(page, size);
@@ -106,6 +105,20 @@ public class TodoServiceImpl implements TodoService {
             String username
     ) {
 
+        // redis cache to get todo by id : redis hit or miss- also called cache aside or lazy caching
+
+        String cacheKey= "todo:"+ username + ":" +id;
+
+        Object cacheTodo= redisTemplate.opsForValue().get(cacheKey);
+
+        if(cacheTodo!=null){
+            System.out.println("REDIS CACHE HIT: "+ cacheTodo);
+
+            return (TodoResponse) cacheTodo;
+        }
+
+        System.out.println("REDIS CACHE MISS: "+ cacheTodo);
+
         User user = getUser(username);
 
         Todos todo = todoRepo
@@ -116,7 +129,11 @@ public class TodoServiceImpl implements TodoService {
                         )
                 );
 
-        return mapToResponse(todo);
+        TodoResponse response= mapToResponse(todo);
+
+        redisTemplate.opsForValue().set(cacheKey, response);
+
+        return response;
     }
 
     @Override
