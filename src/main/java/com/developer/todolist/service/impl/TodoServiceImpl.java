@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,6 +24,9 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoRepo todoRepo;
     private final UserRepo userRepo;
+
+    //inject redis template
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public TodoResponse createTodo(

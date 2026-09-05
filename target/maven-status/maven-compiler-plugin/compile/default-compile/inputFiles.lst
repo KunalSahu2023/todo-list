@@ -1,6 +1,8 @@
+C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\config\RedisConfig.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\config\SecurityConfig.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\controller\AdminController.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\controller\AuthController.java
+C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\controller\RedisTestContoller.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\controller\TodoController.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\entity\Role.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\entity\Todos.java
@@ -21,5 +23,6 @@ C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\sec
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\service\AuthService.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\service\impl\AuthServiceImpl.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\service\impl\TodoServiceImpl.java
+C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\service\RedisTestService.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\service\TodoService.java
 C:\Users\sahu.kunal\Downloads\todo-list\src\main\java\com\developer\todolist\TodoListApplication.java
