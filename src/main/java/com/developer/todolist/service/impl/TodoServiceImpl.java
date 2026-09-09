@@ -56,11 +56,11 @@ public class TodoServiceImpl implements TodoService {
             Boolean completed,
             String search
     ) {
-        String cacheKey= "todos:"+username+ ":page: "+page+ ":size: "+size+ ":completed: "+ completed;
+        String cacheKey= "todos:"+username+ ":page:"+page+ ":size:"+size+ ":completed:"+ completed+ ":search:"+ search;
 
         Object cacheTodos= redisTemplate.opsForValue().get(cacheKey);
 
-        if(cacheKey!=null){
+        if(cacheTodos!=null){
             System.out.println("REDIS CACHE HIT: "+cacheKey);
             return (Page<TodoResponse>)cacheTodos;
         }
