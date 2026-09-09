@@ -4,6 +4,7 @@ import com.developer.todolist.model.AuthResponse;
 import com.developer.todolist.model.LoginRequest;
 import com.developer.todolist.model.RegisterRequest;
 import com.developer.todolist.service.AuthService;
+import com.developer.todolist.service.JwtBlacklistService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
+
+    private final JwtBlacklistService jwtBlacklistService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(
@@ -28,5 +31,24 @@ public class AuthController {
             @Valid @RequestBody LoginRequest request) {
 
         return ResponseEntity.ok(authService.login(request));
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(
+            @RequestHeader("Authorization") String authorizationHeader
+    ) {
+
+        if (authorizationHeader == null ||
+                !authorizationHeader.startsWith("Bearer ")) {
+
+            return ResponseEntity.badRequest()
+                    .body("Invalid Authorization header");
+        }
+
+        String token = authorizationHeader.substring(7);
+
+        jwtBlacklistService.logout(token);
+
+        return ResponseEntity.ok("Logout successful");
     }
 }

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 
 @Service
@@ -136,7 +137,7 @@ public class TodoServiceImpl implements TodoService {
         }
 
         Page<TodoResponse> response= todos.map(this::mapToResponse);
-        redisTemplate.opsForValue().set(cacheKey, response);
+        redisTemplate.opsForValue().set(cacheKey, response, 10, TimeUnit.SECONDS);
 
         return response;
     }
@@ -174,7 +175,7 @@ public class TodoServiceImpl implements TodoService {
 
         TodoResponse response= mapToResponse(todo);
 
-        redisTemplate.opsForValue().set(cacheKey, response);
+        redisTemplate.opsForValue().set(cacheKey, response, 10, TimeUnit.SECONDS);
 
         return response;
     }

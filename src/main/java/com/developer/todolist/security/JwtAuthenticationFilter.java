@@ -1,5 +1,6 @@
 package com.developer.todolist.security;
 
+import com.developer.todolist.service.JwtBlacklistService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +24,8 @@ public class JwtAuthenticationFilter
 
     private final CustomUserDetailsService userDetailsService;
 
+    private final JwtBlacklistService jwtBlacklistService;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -36,6 +39,12 @@ public class JwtAuthenticationFilter
         }
 
         String jwt = authHeader.substring(7);
+
+        if(jwtBlacklistService.isBlackListed(jwt)){
+            filterChain.doFilter(request, response);
+
+            return;
+        }
 
         String username;
 
