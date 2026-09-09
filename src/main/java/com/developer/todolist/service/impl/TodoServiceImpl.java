@@ -8,13 +8,23 @@ import com.developer.todolist.model.TodoResponse;
 import com.developer.todolist.repository.TodoRepo;
 import com.developer.todolist.repository.UserRepo;
 import com.developer.todolist.service.TodoService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.redis.core.Cursor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ScanOptions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -24,6 +34,7 @@ public class TodoServiceImpl implements TodoService {
 
     private final TodoRepo todoRepo;
     private final UserRepo userRepo;
+    private final ObjectMapper objectMapper;
 
     //inject redis template
     private final RedisTemplate<String, Object> redisTemplate;
@@ -31,8 +42,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public TodoResponse createTodo(
             TodoRequest request,
-            String username
-    ) {
+            String username) {
 
         User user = getUser(username);
 
@@ -43,6 +53,7 @@ public class TodoServiceImpl implements TodoService {
                 .build();
 
         Todos savedTodo = todoRepo.save(todo);
+        invalidateTodoListCache(username);
 
         return mapToResponse(savedTodo);
     }
@@ -58,11 +69,30 @@ public class TodoServiceImpl implements TodoService {
     ) {
         String cacheKey= "todos:"+username+ ":page:"+page+ ":size:"+size+ ":completed:"+ completed+ ":search:"+ search;
 
-        Object cacheTodos= redisTemplate.opsForValue().get(cacheKey);
+        Object cacheTodos = redisTemplate.opsForValue().get(cacheKey);
 
-        if(cacheTodos!=null){
-            System.out.println("REDIS CACHE HIT: "+cacheKey);
-            return (Page<TodoResponse>)cacheTodos;
+        if (cacheTodos != null) {
+            System.out.println("REDIS CACHE HIT: " + cacheKey);
+
+            JsonNode jsonNode = objectMapper.valueToTree(cacheTodos);
+
+            List<TodoResponse> content =
+                    objectMapper.convertValue(
+                            jsonNode.get("content"),
+                            new TypeReference<List<TodoResponse>>() {}
+                    );
+
+            int pageNumber = jsonNode.get("number").asInt();
+            int pageSize = jsonNode.get("size").asInt();
+            long totalElements = jsonNode.get("totalElements").asLong();
+
+            Pageable pageable = PageRequest.of(pageNumber, pageSize);
+
+            return new PageImpl<>(
+                    content,
+                    pageable,
+                    totalElements
+            );
         }
         System.out.println("REDIS CACHE MISS: "+cacheKey);
 
@@ -125,12 +155,12 @@ public class TodoServiceImpl implements TodoService {
         Object cacheTodo= redisTemplate.opsForValue().get(cacheKey);
 
         if(cacheTodo!=null){
-            System.out.println("REDIS CACHE HIT: "+ cacheTodo);
+            System.out.println("REDIS CACHE HIT: "+ cacheKey);
 
-            return (TodoResponse) cacheTodo;
+            return objectMapper.convertValue(cacheTodo, TodoResponse.class);
         }
 
-        System.out.println("REDIS CACHE MISS: "+ cacheTodo);
+        System.out.println("REDIS CACHE MISS: "+ cacheKey);
 
         User user = getUser(username);
 
@@ -170,6 +200,8 @@ public class TodoServiceImpl implements TodoService {
         todo.setCompleted(request.isCompleted());
 
         Todos updatedTodo = todoRepo.save(todo);
+        invalidateTodoCache(username, id);
+        invalidateTodoListCache(username);
 
         return mapToResponse(updatedTodo);
     }
@@ -186,11 +218,12 @@ public class TodoServiceImpl implements TodoService {
                 .findByIdAndUser(id, user)
                 .orElseThrow(() ->
                         new ResourceNotFoundException(
-                                "Todo not found with id: " + id
-                        )
-                );
+                                "Todo not found with id: " + id));
 
         todoRepo.delete(todo);
+
+        invalidateTodoCache(username, id);
+        invalidateTodoListCache(username);
     }
 
     private User getUser(String username) {
@@ -218,5 +251,34 @@ public class TodoServiceImpl implements TodoService {
         response.setUpdatedAt(todo.getUpdatedAt());
 
         return response;
+    }
+
+    // helper class for cache invalidation
+    private void invalidateTodoCache(String username, Long id) {
+
+        String cacheKey = "todo:" + username + ":" + id;
+        redisTemplate.delete(cacheKey);
+
+        System.out.println("REDIS CACHE INVALIDATED: " + cacheKey);
+    }
+
+    private void invalidateTodoListCache(String username) {
+
+        String pattern = "todos:" + username + ":*";
+
+        Set<String> keys = new HashSet<>();
+
+        try (Cursor<String> cursor = redisTemplate.scan(
+                ScanOptions.scanOptions().match(pattern).count(100).build())) {
+
+            while (cursor.hasNext()) {
+                keys.add(cursor.next());
+            }
+        }
+
+        if (!keys.isEmpty()) {
+            redisTemplate.delete(keys);
+            System.out.println("REDIS LIST CACHE INVALIDATED: " + keys);
+        }
     }
 }
