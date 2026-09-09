@@ -1,0 +1,49 @@
+services:
+
+  mysql:
+    image: mysql:8.4
+    container_name: todo-mysql
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todo_list
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+
+
+  redis:
+    image: redis:7
+    container_name: todo-redis
+
+    ports:
+      - "6379:6379"
+
+
+  app:
+    image: todo-list:1.0
+    container_name: todo-app
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: todo_list
+      DB_USERNAME: root
+      DB_PASSWORD: root
+
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+
+    depends_on:
+      - mysql
+      - redis
+
+
+volumes:
+  todo-mysql-data:
