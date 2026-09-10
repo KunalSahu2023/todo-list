@@ -92,4 +92,15 @@ public ResponseEntity<String> sendFanoutMessage(
             );
         }
 
+        //serialization
+        @GetMapping("/send-object")
+        public ResponseEntity<String> sendTodoObject() {
+
+            rabbitMQProducer.sendTodoObject();
+
+            return ResponseEntity.ok(
+                    "Todo object sent successfully"
+            );
+        }
+
 }

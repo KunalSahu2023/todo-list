@@ -6,12 +6,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class TopicTodoConsumer {
 
-    // todo.*- one word
     @RabbitListener(queues = "todo.topic.queue")
-    public void receiveMessage(String message) {
+    public void receiveTodoObject(TodoMessage todoMessage) {
 
         System.out.println(
-                "TOPIC todo.* QUEUE received: " + message
+                "CONSUMER 1 | todo.* | " +
+                        "ID=" + todoMessage.getId() +
+                        " | Title=" + todoMessage.getTitle() +
+                        " | Completed=" + todoMessage.isCompleted()
         );
     }
 }

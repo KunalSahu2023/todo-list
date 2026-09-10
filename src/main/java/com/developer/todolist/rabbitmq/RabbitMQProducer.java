@@ -105,4 +105,25 @@ public void sendFanoutMessage(String message) {
                             + " | message=" + message
             );
         }
+
+        //serialization
+        public void sendTodoObject() {
+
+            TodoMessage todoMessage =
+                    new TodoMessage(
+                            101L,
+                            "Learn RabbitMQ",
+                            false
+                    );
+
+            rabbitTemplate.convertAndSend(
+                    "todo.topic.exchange",
+                    "todo.created",
+                    todoMessage
+            );
+
+            System.out.println(
+                    "Todo object sent: " + todoMessage
+            );
+        }
 }
