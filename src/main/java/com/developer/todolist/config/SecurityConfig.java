@@ -48,7 +48,8 @@ public class SecurityConfig {
 
                         // Public APIs
                         .requestMatchers(
-                                "/auth/**"
+                                "/auth/**",
+                                "rabbit/**"
                         ).permitAll()
 
                         // Admin APIs
