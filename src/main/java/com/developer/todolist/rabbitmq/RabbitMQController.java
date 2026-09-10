@@ -14,6 +14,7 @@ public class RabbitMQController {
 
     private final RabbitMQProducer rabbitMQProducer;
 
+    //direct exchange
     @GetMapping("/send")
     public ResponseEntity<String> sendMessage(
             @RequestParam(defaultValue = "Hello RabbitMQ") String message
@@ -35,4 +36,19 @@ public class RabbitMQController {
                 "Created message sent successfully"
         );
     }
+
+//    fanout exchange
+@GetMapping("/send-fanout")
+public ResponseEntity<String> sendFanoutMessage(
+        @RequestParam(
+                defaultValue = "Todo created"
+        ) String message
+) {
+    rabbitMQProducer.sendFanoutMessage(message);
+
+    return ResponseEntity.ok(
+            "Fanout message sent successfully"
+    );
+    }
+
 }
