@@ -49,6 +49,47 @@ public ResponseEntity<String> sendFanoutMessage(
     return ResponseEntity.ok(
             "Fanout message sent successfully"
     );
-    }
+        }
+
+        //topic exchange
+        @GetMapping("/send-topic")
+        public ResponseEntity<String> sendTopicMessage(
+                @RequestParam(defaultValue = "todo.created") String routingKey,
+                @RequestParam(defaultValue = "Todo created") String message
+        ) {
+
+            rabbitMQProducer.sendTopicMessage(
+                    routingKey,
+                    message
+            );
+
+            return ResponseEntity.ok(
+                    "Topic message sent successfully"
+            );
+        }
+
+        //header exchange
+        @GetMapping("/send-headers")
+        public ResponseEntity<String> sendHeadersMessage(
+                @RequestParam(defaultValue = "Notification message")
+                String message,
+
+                @RequestParam(defaultValue = "notification")
+                String type,
+
+                @RequestParam(defaultValue = "high")
+                String priority
+        ) {
+
+            rabbitMQProducer.sendHeadersMessage(
+                    message,
+                    type,
+                    priority
+            );
+
+            return ResponseEntity.ok(
+                    "Headers message sent successfully"
+            );
+        }
 
 }

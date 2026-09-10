@@ -1,8 +1,12 @@
 package com.developer.todolist.rabbitmq;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
+
+import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
@@ -50,5 +54,55 @@ public void sendFanoutMessage(String message) {
     System.out.println(
             "Fanout message sent: " + message
     );
-}
+        }
+
+        //topic exchange
+        public void sendTopicMessage(
+                String routingKey,
+                String message
+        ) {
+
+            rabbitTemplate.convertAndSend(
+                    "todo.topic.exchange",
+                    routingKey,
+                    message
+            );
+
+            System.out.println(
+                    "Topic message sent | routingKey="
+                            + routingKey
+                            + " | message="
+                            + message
+            );
+        }
+
+        //header exchange
+        public void sendHeadersMessage(
+                String message,
+                String type,
+                String priority
+        ) {
+
+            Message rabbitMessage =
+                    MessageBuilder
+                            .withBody(
+                                    message.getBytes(StandardCharsets.UTF_8)
+                            )
+                            .setHeader("type", type)
+                            .setHeader("priority", priority)
+                            .build();
+
+            rabbitTemplate.send(
+                    "todo.headers.exchange",
+                    "",
+                    rabbitMessage
+            );
+
+            System.out.println(
+                    "Headers message sent | "
+                            + "type=" + type
+                            + " | priority=" + priority
+                            + " | message=" + message
+            );
+        }
 }
