@@ -10,13 +10,29 @@ public class RabbitMQProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendMessage(String message) {
+    public void sendTodoMessage(String message) {
 
         rabbitTemplate.convertAndSend(
-                "todo.queue",
+                "todo.exchange",
+                "todo",
                 message
         );
 
-        System.out.println("Message sent: " + message);
+        System.out.println(
+                "Sent with routing key: todo"
+        );
+    }
+
+    public void sendCreatedMessage(String message) {
+
+        rabbitTemplate.convertAndSend(
+                "todo.exchange",
+                "todo.created",
+                message
+        );
+
+        System.out.println(
+                "Sent with routing key: todo.created"
+        );
     }
 }

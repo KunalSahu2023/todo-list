@@ -18,8 +18,21 @@ public class RabbitMQController {
     public ResponseEntity<String> sendMessage(
             @RequestParam(defaultValue = "Hello RabbitMQ") String message
     ) {
-        rabbitMQProducer.sendMessage(message);
+        rabbitMQProducer.sendTodoMessage(message);
 
-        return ResponseEntity.ok("Message sent successfully");
+        return ResponseEntity.ok(
+                "Message sent successfully"
+        );
+    }
+
+    @GetMapping("/send-created")
+    public ResponseEntity<String> sendCreatedMessage(
+            @RequestParam(defaultValue = "Todo created") String message
+    ) {
+        rabbitMQProducer.sendCreatedMessage(message);
+
+        return ResponseEntity.ok(
+                "Created message sent successfully"
+        );
     }
 }
