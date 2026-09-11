@@ -47,20 +47,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // Public APIs
-                        .requestMatchers(
-                                "/auth/**",
-                                "rabbit/**"
-                        ).permitAll()
+                        // rabbitMQ
+                        .requestMatchers("/auth/**", "rabbit/**").permitAll()
+
+//                        //kafka
+//                        .requestMatchers("/todos/kafka-test").permitAll()
 
                         // Admin APIs
-                        .requestMatchers(
-                                "/admin/**"
-                        ).hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
 
                         // Todo APIs
-                        .requestMatchers(
-                                "/todos/**"
-                        ).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/todos/**").hasAnyRole("USER", "ADMIN")
 
                         // Everything else requires authentication
                         .anyRequest().authenticated()

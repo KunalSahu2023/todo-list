@@ -84,10 +84,15 @@ services:
 
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 
   app:
-    image: todo-list:1.10
+    build:
+        context: .
+        dockerfile: Dockerfile
+
+    image: todo-list:dev
     container_name: todo-app
 
     ports:
