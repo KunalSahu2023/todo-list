@@ -32,10 +32,6 @@ services:
     ports:
       - "6379:6379"
 
-    profiles:
-      - dev
-      - prod
-
     mem_limit: 256m
     cpus: 0.5
 
@@ -141,11 +137,6 @@ services:
 
       kafka:
         condition: service_started
-
-    profiles:
-      - dev
-      - prod
-
 
 volumes:
   todo-postgres-data:
